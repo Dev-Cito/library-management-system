@@ -1,0 +1,28 @@
+    services:
+      mysql:
+        image: mysql:8.0                          # You can choose a specific MySQL version
+        container_name : docker_container
+        restart : always
+        environment:
+          MYSQL_ROOT_PASSWORD: Naruto-1342-1342   # Replace with a strong password
+          MYSQL_DATABASE: csconer                 # Optional: name of the default database
+          MYSQL_USER: new_dev                     # Optional: create a new user
+          MYSQL_PASSWORD: Naruto-1342-1342        # Optional: password for the new user
+        ports:
+          - "3307:3306"                           # Maps host port 3306 to container port 3306
+        volumes:
+          - mysql_data:/var/lib/mysql             # Persist data in a named volume
+
+
+      adminer:
+          image: adminer
+          container_name: adminer_ui
+          ports:
+            - "8080:8080"
+          depends_on:
+            - mysql
+
+
+
+    volumes:
+      mysql_data:                                 # Define the named volume
